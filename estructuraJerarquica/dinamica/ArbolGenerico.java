@@ -69,6 +69,58 @@ public class ArbolGenerico {
         }
         return hecho;
     }
+
+    public boolean pertenece(Object elemBuscado){
+        //Devuelve 'verdadero' cuando encuentra al 1er nodo que sea igual al elemento buscado en el arbol
+        boolean encontrado=false;
+        NodoGenerico nodo=obtenerNodo(raiz, elemBuscado);
+        if (nodo!=null) {
+            encontrado=true;
+        }
+        return encontrado;
+    }
+
+    public Lista ancentros(Object elemBuscado){
+        Lista listaAnc=null;
+        if (pertenece(elemBuscado)){
+            
+        }
+        return listaAnc;
+    }
+
+    private void listarAncestros(NodoGenerico nodoActual, Object ultimo, Lista listaDefinitiva){
+        if (nodoActual.getElem().equals(ultimo)) {
+            //Visita el elemento del nodo.
+            listaAux.insertar(nodo.getElem(),listaAux.longitud()+1);
+            NodoGenerico hijo=nodo.getHijoIzquierdo();
+            while(hijo!=null){
+                listarPreordenAux(hijo,listaAux);
+                hijo=hijo.getHermanoDerecho();
+            }
+            
+        }
+    }
+    public String toString(){
+        return toStringAux(this.raiz);
+    }
+
+    private String toStringAux(NodoGenerico nodo){
+        String salida="";
+        if (nodo!=null) {
+            salida+=nodo.getElem().toString()+">>";
+            NodoGenerico hijo=nodo.getHijoIzquierdo();
+            while (hijo!=null) {
+                salida+=hijo.getElem().toString()+", ";
+                hijo=hijo.getHermanoDerecho();
+            }
+            hijo=nodo.getHijoIzquierdo();
+            while (hijo!=null) {
+                salida+="\n"+toStringAux(hijo);
+                hijo=hijo.getHermanoDerecho();
+            }
+        }
+        return salida;
+    }
     //ORDENAMIENTOS ÁRBOL (PRE-ORDEN, IN-ORDEN Y POS-ORDEN)
     public Lista listarPreorden(){
         //Retorna una lista con los elementos del árbol en PRE-ORDEN
@@ -89,5 +141,6 @@ public class ArbolGenerico {
             
         }
     }
+
 
 }
